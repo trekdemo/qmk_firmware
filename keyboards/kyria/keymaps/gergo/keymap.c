@@ -14,9 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "gergo.h"
 
 enum layers {
     _QWERTY = 0,
+    _COLEMAK,
     _LOWER,
     _RAISE,
     _ADJUST
@@ -34,15 +36,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  | [ {  |  (   |  |   )  | ] }  |   N  |   M  | ,  < | . >  | /  ? |  - _   |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | RGB  | Bksp |Space | Tab  | Esc  |  | Tab  | Enter| Space| Del  |      |
- *                        | TOGGL|      | Alt  | Raise| Lower|  | Raise| Lower|      |      |      |
+ *                        | RGB  | Bksp |Space | Tab  | Esc  |  | Tab  | Enter| Space| Del  |Colema|
+ *                        | TOGGL|      | Alt  | Lower| Raise|  | Lower| Raise|      |      | Toggl|
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_QWERTY] = LAYOUT(
-      KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T,                                                     KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSLASH,
-      KC_BSPC, LCMD_T(KC_A), LCTL_T(KC_S), LALT_T(KC_D), SFT_T(KC_F), KC_G,                     KC_H, RSFT_T(KC_J), ALGR_T(KC_K), RCTL_T(KC_L), RGUI_T(KC_SCLN), KC_QUOT,
-      KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_LBRC, KC_LPRN,                                  KC_RPRN, KC_RBRC, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_MINS,
-            RGB_TOG, KC_BSPC, MT(MOD_LALT, KC_SPC), LT(_RAISE, KC_TAB), LT(_LOWER, KC_ESC),     LT(_RAISE, KC_TAB), LT(_LOWER, KC_ENT), KC_SPC, KC_DEL, XXXXXXX
+    [_QWERTY] = LAYOUT_wrapper(
+      KC_TAB,  _________________QWERTY_L1_________________,                                         _________________QWERTY_R1_________________, KC_BSLASH,
+      KC_BSPC, _____________MOD_QWERTY_L2_________________,                                         _____________MOD_QWERTY_R2_________________, KC_QUOT,
+      KC_LSFT, _________________QWERTY_L3_________________, KC_LBRC , KC_LPRN , KC_RPRN , KC_RBRC , _________________QWERTY_R3_________________, KC_MINS,
+      RGB_TOG , KC_BSPC , MT(MOD_LALT, KC_SPC), LT(_LOWER, KC_TAB), LT(_RAISE, KC_ESC), LT(_LOWER, KC_TAB), LT(_RAISE, KC_ENT), KC_SPC, KC_DEL, TO(_COLEMAK)
+    ),
+/*
+ * Colemak-DH
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |        |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |        |
+ * |        |  GUI | Ctrl | Alt  | Shft |      |                              |      | Shft |  Alt | Ctrl |  GUI |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |   Z  |   X  |   C  |   V  |   B  |      |      |  |      |      |   N  |   M  | ,  < | . >  | /  ? |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |      |      |      |         |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_COLEMAK] = LAYOUT_wrapper(
+      _______, _________________TARMAK1_L1________________,                                     _________________TARMAK1_R1________________, _______,
+      _______, _____________MOD_TARMAK1_L2________________,                                     _____________MOD_TARMAK1_R2________________, _______,
+      _______, _________________TARMAK1_L3________________, _______, _______, _______, _______, _________________TARMAK1_R3________________, _______,
+                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, TO(_QWERTY)
     ),
 /*
  * Lower Layer: Symbols
@@ -82,8 +104,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_RAISE] = LAYOUT(
-      _______, KC_1, 	  KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
+    [_RAISE] = LAYOUT_wrapper(
+      _______, ________________NUMBERS_L__________________,                                     ________________NUMBERS_R__________________, _______,
       _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLU,                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
       _______, _______, _______, _______, KC_MUTE, KC_VOLD, _______, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -153,26 +175,15 @@ static void render_kyria_logo(void) {
     oled_write_raw_P(kyria_logo, sizeof(kyria_logo));
 }
 
-static void render_qmk_logo(void) {
-  static const char PROGMEM qmk_logo[] = {
-    0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
-    0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,
-    0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0};
-
-  oled_write_P(qmk_logo, false);
-}
-
 static void render_status(void) {
-    // QMK Logo and version information
-    render_qmk_logo();
-    oled_write_P(PSTR("Gergo's\n"), false);
-    oled_write_P(PSTR("Kyria rev1.0\n\n"), false);
-
     // Host Keyboard Layer Status
-    oled_write_P(PSTR("Layer: "), false);
+    oled_write_P(PSTR("\nLayer: "), false);
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
-            oled_write_P(PSTR("Default\n"), false);
+            oled_write_P(PSTR("Qwerty\n"), false);
+            break;
+        case _COLEMAK:
+            oled_write_P(PSTR("Tarmak #1\n"), false);
             break;
         case _LOWER:
             oled_write_P(PSTR("Lower\n"), false);

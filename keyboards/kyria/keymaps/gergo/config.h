@@ -20,6 +20,11 @@
 #define IGNORE_MOD_TAP_INTERRUPT
 // #define PERMISSIVE_HOLD
 
+#ifdef ENCODER_ENABLE
+  #define ENCODER_DIRECTION_FLIP
+  #define ENCODER_RESOLUTION 2 // Fixing the skipping with the EC11K encoder
+#endif
+
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
 #endif
