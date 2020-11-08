@@ -2,6 +2,13 @@
 
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
+
+// == Numbers & Symbols ========================================================
+// ,-----------------------------.   ,-----------------------------.
+// |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |
+#define ________________SYMBOLS_L__________________  KC_EXLM, KC_AT, KC_HASH, KC_DLR,  KC_PERC
+#define ________________SYMBOLS_R__________________  KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN
+
 // Layout parts for easy reuse between keyboard keymaps
 // ,-----+-----+-----+-----+-----,   ,-----+-----+-----+-----+-----,
 // |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
