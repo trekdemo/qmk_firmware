@@ -39,3 +39,12 @@
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
 #define SPLIT_USB_DETECT
 #define NO_USB_STARTUP_CHECK
+
+// https://docs.qmk.fm/#/feature_rgblight?id=lighting-layers
+#define RGBLIGHT_LAYERS
+
+// https://docs.splitkb.com/hc/en-us/articles/360014402359-How-can-I-make-RGB-animations-prettier-on-the-Kyria-
+// Circular
+// #define RGBLIGHT_LED_MAP {0,1,2,9,8,7,4,3,5,6,19,18,17,10,11,12,15,16,14,13}
+// Horizontal gradient
+// #define RBGLIGHT_LED_MAP {9,8,6,7,5,3,2,4,1,0,10,12,13,11,14,16,17,15,18,19}
