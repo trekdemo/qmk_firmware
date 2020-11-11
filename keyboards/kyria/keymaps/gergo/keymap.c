@@ -166,34 +166,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef RGBLIGHT_LAYERS
 // Light LEDs 9 & 10 in cyan when keyboard layer 1 is active
-const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 2, HSV_RED}
-);
-const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 2, HSV_BLUE}
-);
-const rgblight_segment_t PROGMEM ajust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 2, HSV_PURPLE}
-);
+const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_RED});
+const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_BLUE});
+const rgblight_segment_t PROGMEM ajust_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_PURPLE});
 // Now define the array of layers. Later layers take precedence
-const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    lower_layer,
-    raise_layer,
-    ajust_layer
-);
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] =
+  RGBLIGHT_LAYERS_LIST(lower_layer, raise_layer, ajust_layer);
 
-void keyboard_post_init_user(void) {
-    // Enable the LED layers
-    rgblight_layers = my_rgb_layers;
-}
+void keyboard_post_init_user(void) { rgblight_layers = my_rgb_layers; }
 #endif
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   layer_state_t new_state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 
+#ifdef RGBLIGHT_LAYERS
   rgblight_set_layer_state(0, layer_state_cmp(new_state, _LOWER));
   rgblight_set_layer_state(1, layer_state_cmp(new_state, _RAISE));
   rgblight_set_layer_state(2, layer_state_cmp(new_state, _ADJUST));
+#endif
+
   return new_state;
 }
 
