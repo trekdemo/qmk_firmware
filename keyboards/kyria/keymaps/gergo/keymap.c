@@ -37,15 +37,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  | [ {  |  (   |  |   )  | ] }  |   N  |   M  | ,  < | . >  | /  ? |  - _   |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | RGB  | Alt  | Cmd  | Tab  | Esc  |  | Tab  | Enter| Space| Del  |Colema|
- *                        | TOGGL|      |      | Lower| Raise|  | Lower| Raise|      |      | Toggl|
+ *                        | RGB  | Esc  | BSpc | Tab  | Esc  |  | Tab  | Enter| Space| Del  |Colema|
+ *                        | TOGGL| Alt  | Cmd  | Lower| Raise|  | Lower| Raise|      |      | Toggl|
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT_wrapper(
       KC_TAB,  _________________QWERTY_L1_________________,                                         _________________QWERTY_R1_________________, KC_BSLASH,
       KC_BSPC, _____________MOD_QWERTY_L2_________________,                                         _____________MOD_QWERTY_R2_________________, KC_QUOT,
       KC_LSFT, _________________QWERTY_L3_________________, KC_LBRC , KC_LPRN , KC_RPRN , KC_RBRC , _________________QWERTY_R3_________________, KC_MINS,
-      RGB_TOG , KC_LALT, KC_LCMD, LT(_LOWER, KC_TAB), LT(_RAISE, KC_ESC), LT(_LOWER, KC_TAB), LT(_RAISE, KC_ENT), KC_SPC, KC_DEL, TO(_COLEMAK)
+      RGB_TOG , LALT_T(KC_ESC), LCMD_T(KC_BSPC), LT(_LOWER, KC_TAB), LT(_RAISE, KC_ESC), LT(_LOWER, KC_TAB), LT(_RAISE, KC_ENT), KC_SPC, KC_DEL, TO(_COLEMAK)
       ),
 /*
  * Colemak-DH
@@ -62,9 +62,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_COLEMAK] = LAYOUT_wrapper(
-      _______, _________________COLEMAK_L1________________,                                     _________________COLEMAK_R1________________, _______,
-      _______, _____________MOD_COLEMAK_L2________________,                                     _____________MOD_COLEMAK_R2________________, _______,
-      _______, _________________COLEMAK_L3________________, _______, _______, _______, _______, _________________COLEMAK_R3________________, _______,
+      _______, ________________COLEMAK_L1_________________,                                     ________________COLEMAK_R1_________________, _______,
+      _______, ____________MOD_COLEMAK_L2_________________,                                     ____________MOD_COLEMAK_R2_________________, _______,
+      _______, ________________COLEMAK_L3_________________, _______, _______, _______, _______, ________________COLEMAK_R3_________________, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, TO(_QWERTY)
       ),
     [_TARMAK] = LAYOUT_wrapper(
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * Lower Layer: Media, Navigation
    *
    * ,-------------------------------------------.                              ,-------------------------------------------.
-   * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+   * |        |      |      |      |      |      |                              | Home | PgUp | PgDn | End  |      |        |
    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
    * |        |      | Prev | Play | Next | VolUp|                              | Left | Down | Up   | Right|      |        |
    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                        `----------------------------------'  `----------------------------------'
    */
   [_LOWER] = LAYOUT_wrapper(
-      _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
+      _______, _______, _______, _______, _______, _______,                                     KC_HOME, KC_PGUP, KC_PGDN, KC_END , _______, _______,
       _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLU,                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
       _______, _______, _______, _______, KC_MUTE, KC_VOLD, _______, _______, _______, _______, A(KC_LEFT), _______, _______, A(KC_RGHT), _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -173,9 +173,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef RGBLIGHT_LAYERS
 // Light LEDs 9 & 10 in cyan when keyboard layer 1 is active
-const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_RED});
-const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_BLUE});
-const rgblight_segment_t PROGMEM ajust_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_PURPLE});
+const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 2, HSV_RED},
+    {9, 2, HSV_RED}
+);
+const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 2, HSV_BLUE},
+    {9, 2, HSV_BLUE}
+);
+const rgblight_segment_t PROGMEM ajust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 2, HSV_PURPLE},
+    {9, 2, HSV_PURPLE}
+);
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] =
   RGBLIGHT_LAYERS_LIST(lower_layer, raise_layer, ajust_layer);
