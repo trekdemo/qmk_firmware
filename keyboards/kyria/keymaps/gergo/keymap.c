@@ -32,21 +32,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  | \   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * | Esc    |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
- * | Ctrl   |  GUI | Ctrl | Alt  | Shft |      |                              |      | Shft |  Alt | Ctrl |  GUI |        |
+ * | BSpc   |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
+ * |        |  GUI | Ctrl | Alt  | Shft |      |                              |      | Shft |  Alt | Ctrl |  GUI |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |   Z  |   X  |   C  |   V  |   B  | [ {  |  (   |  |   )  | ] }  |   N  |   M  | ,  < | . >  | /  ? |  - _   |
  * | LShift |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      | RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | RGB  | Esc  | BSpc | Tab  |      |  |      | Enter| Space| Del  |Colema|
+ *                        | RGB  | Esc  |      |      |      |  |      | Enter| Space| Del  |Colema|
  *                        | TOGGL| Alt  | Cmd  | Lower| Raise|  | Lower| Raise|      |      | Toggl|
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT_wrapper(
-      KC_TAB,         _________________QWERTY_L1_________________,                                         _________________QWERTY_R1_________________, KC_BSLASH,
-      LCTL_T(KC_ESC), _____________MOD_QWERTY_L2_________________,                                         _____________MOD_QWERTY_R2_________________, KC_QUOT,
-      KC_LSFT,        _________________QWERTY_L3_________________, KC_LBRC , KC_LPRN , KC_RPRN , KC_RBRC , _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
-      RGB_TOG , LALT_T(KC_ESC), LCMD_T(KC_BSPC), LT(_LOWER, KC_TAB), MO(_RAISE), MO(_LOWER), LT(_RAISE, KC_ENT), RCMD_T(KC_SPC), RALT_T(KC_DEL), TO(_COLEMAK)
+      KC_TAB,  _________________QWERTY_L1_________________,                                         _________________QWERTY_R1_________________, KC_BSLASH,
+      KC_BSPC, _____________MOD_QWERTY_L2_________________,                                         _____________MOD_QWERTY_R2_________________, KC_QUOT,
+      KC_LSFT, _________________QWERTY_L3_________________, KC_LBRC , KC_LPRN , KC_RPRN , KC_RBRC , _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
+      RGB_TOG , LALT_T(KC_ESC), KC_LCMD, MO(_LOWER), MO(_RAISE),                       MO(_LOWER), LT(_RAISE, KC_ENT), KC_SPC, RALT_T(KC_DEL), TO(_COLEMAK)
       ),
   /*
    * Lower Layer: Media, Navigation
