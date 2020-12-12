@@ -26,3 +26,6 @@
   // https://docs.qmk.fm/#/feature_rgblight?id=lighting-layers
   #define RGBLIGHT_LAYERS
 #endif
+
+#define COMBO_COUNT 2
+#define COMBO_TERM 100

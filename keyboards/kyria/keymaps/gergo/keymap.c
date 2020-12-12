@@ -308,3 +308,27 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   }
 }
 #endif
+
+enum combos {
+  RT_PREV_TAB,
+  YU_NEXT_TAB,
+};
+
+const uint16_t PROGMEM rt_combo[] = {KC_R, KC_T, COMBO_END};
+const uint16_t PROGMEM yu_combo[] = {KC_Y, KC_U, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+    [RT_PREV_TAB] = COMBO_ACTION(rt_combo),
+    [YU_NEXT_TAB] = COMBO_ACTION(yu_combo)
+};
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+  switch(combo_index) {
+    case RT_PREV_TAB:
+      if (pressed) tap_code16(LGUI(KC_LBRACKET));
+      break;
+    case YU_NEXT_TAB:
+      if (pressed) tap_code16(LGUI(KC_RBRACKET));
+      break;
+  }
+}
