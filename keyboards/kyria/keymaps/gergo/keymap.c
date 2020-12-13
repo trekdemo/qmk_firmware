@@ -19,7 +19,6 @@
 enum layers {
     _QWERTY = 0,
     _COLEMAK,
-    _TARMAK,
     _LOWER,
     _RAISE,
     _ADJUST
@@ -144,12 +143,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, ________________COLEMAK_L3_________________, _______, _______, _______, _______, ________________COLEMAK_R3_________________, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, TO(_QWERTY)
       ),
-    [_TARMAK] = LAYOUT_wrapper(
-      _______, _________________TARMAK1_L1________________,                                     _________________TARMAK1_R1________________, _______,
-      _______, _____________MOD_TARMAK1_L2________________,                                     _____________MOD_TARMAK1_R2________________, _______,
-      _______, _________________TARMAK1_L3________________, _______, _______, _______, _______, _________________TARMAK1_R3________________, _______,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, TO(_QWERTY)
-      ),
   // /*
   //  * Layer template
   //  *
@@ -225,12 +218,6 @@ static void render_status(void) {
       oled_write_P(PSTR("Q W F P B J L U Y ;\n\n"), false);
       oled_write_P(PSTR("A R S T G M N E I O\n\n"), false);
       oled_write_P(PSTR("Z X C D V K H , . /\n"), false);
-      break;
-    case _TARMAK:
-      oled_write_P(PSTR("TARMAK-DH #1\n\n"), false);
-      oled_write_P(PSTR("Q W J R T Y U I O P\n\n"), false);
-      oled_write_P(PSTR("A S D F G K N E L ;\n\n"), false);
-      oled_write_P(PSTR("Z X C V B M H , . /\n"), false);
       break;
     case _LOWER:
       oled_write_P(PSTR("LOWER\n\n"), false);
