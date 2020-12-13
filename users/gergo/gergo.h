@@ -24,15 +24,15 @@
 // ,-----+-----+-----x-----x-----,   ,-----x-----x-----+-----+-----,
 // |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  |
 // ,-----+-----+-----+-----+-----,   ,-----+-----+-----+-----+-----,
-#define _________________QWERTY_L1_________________  KC_Q, KC_W, KC_E, KC_R, KC_T
-#define _________________QWERTY_L2_________________  KC_A, KC_S, KC_D, KC_F, KC_G
-#define _____________MOD_QWERTY_L2_________________  LCMD_T(KC_A), LCTL_T(KC_S), LALT_T(KC_D), LSFT_T(KC_F), KC_G
-#define _________________QWERTY_L3_________________  KC_Z, KC_X, KC_C, KC_V, KC_B
+#define _________________QWERTY_L1_________________  KC_Q,         KC_W,         KC_E,         KC_R,         KC_T
+#define _________________QWERTY_L2_________________  KC_A,         KC_S,         KC_D,         KC_F,         KC_G
+#define _____________MOD_QWERTY_L2_________________  LCMD_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G
+#define _________________QWERTY_L3_________________  KC_Z,         ALGR_T(KC_X), KC_C,         KC_V,         KC_B
 
-#define _________________QWERTY_R1_________________  KC_Y, KC_U, KC_I, KC_O, KC_P
-#define _________________QWERTY_R2_________________  KC_H, KC_J, KC_K, KC_L, KC_SCLN
-#define _____________MOD_QWERTY_R2_________________  KC_H, RSFT_T(KC_J), ALGR_T(KC_K), RCTL_T(KC_L), RCMD_T(KC_SCLN)
-#define _________________QWERTY_R3_________________  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH
+#define _________________QWERTY_R1_________________  KC_Y, KC_U,         KC_I,         KC_O,           KC_P
+#define _________________QWERTY_R2_________________  KC_H, KC_J,         KC_K,         KC_L,           KC_SCLN
+#define _____________MOD_QWERTY_R2_________________  KC_H, RSFT_T(KC_J), RCTL_T(KC_K), RALT_T(KC_L),   RCMD_T(KC_SCLN)
+#define _________________QWERTY_R3_________________  KC_N, KC_M,         KC_COMM,      ALGR_T(KC_DOT), KC_SLSH
 
 // == COLEMAK-DH ===============================================================
 // http://colemakmods.github.io/mod-dh/keyboards.html#matrix-keyboards
