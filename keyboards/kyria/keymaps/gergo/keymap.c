@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, _______, _______, _______, _______,                                     KC_HOME, KC_PGUP, KC_PGDN, KC_END , _______, KC_EQL,
       _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLU,                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, KC_LBRC,
       _______, _______, _______, _______, KC_MUTE, KC_VOLD, _______, _______, _______, _______, A(KC_LEFT), _______, _______, A(KC_RGHT), _______, KC_RBRC,
-                                 _______, _______, _______, _______, _______, C(KC_UP), C(KC_RGHT), _______, _______, _______
+                                 _______, _______, _______, _______, _______, MC_EXPO, MC_NEXT, _______, _______, _______
       ),
 
   /*
@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_EQL,
       _______, ________________NUMBERS_L__________________,                                     ________________NUMBERS_R__________________, KC_LBRC,
       _______, _______, _______, KC_GRV , KC_TILD, KC_EQL , _______, _______, _______, _______, KC_MINS, KC_PLUS, KC_SLSH, KC_ASTR, KC_PERC, KC_RBRC,
-                                 _______, _______, _______, C(KC_LEFT), C(KC_UP) , _______, _______, _______, _______, _______
+                                 _______, _______, _______, MC_PREV, MC_AXPO, _______, _______, _______, _______, _______
       ),
   /*
    * ,-------------------------------------------.                              ,-------------------------------------------.

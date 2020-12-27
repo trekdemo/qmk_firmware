@@ -1,5 +1,10 @@
 #pragma once
 
+#define MC_EXPO C(KC_UP)
+#define MC_AXPO C(KC_DOWN)
+#define MC_NEXT C(KC_RGHT)
+#define MC_PREV C(KC_LEFT)
+
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
 
