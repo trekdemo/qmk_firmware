@@ -19,6 +19,7 @@
 enum layers {
     _QWERTY = 0,
     _COLEMAK,
+    _NUM,
     _NAV,
     _MOUSE,
     _RAISE,
@@ -39,15 +40,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | LShift |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      | RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        | RGB  | Esc  |      | Tab  |      |  |      | Enter| Space| Del  |Colema|
- *                        | TOGGL|      | Nav  | Mouse| [ {  |  | Nav  | Raise|      |      | Toggl|
+ *                        | TOGGL| Num  | Nav  | Mouse| [ {  |  | Nav  | Raise|      |      | Toggl|
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT_wrapper(
       KC_TAB,  _________________QWERTY_L1_________________,                                         _________________QWERTY_R1_________________, KC_BSLASH,
       KC_BSPC, _____________MOD_QWERTY_L2_________________,                                         _____________MOD_QWERTY_R2_________________, KC_QUOT,
       KC_LSFT, _________________QWERTY_L3_________________, KC_LBRC , KC_LPRN , KC_RPRN , KC_RBRC , _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
-               RGB_TOG , KC_GESC, MO(_NAV),       LT(_MOUSE, KC_TAB), KC_LBRC,  KC_RBRC, LT(_RAISE, KC_ENT), KC_SPC, RALT_T(KC_DEL), TO(_COLEMAK)
+           RGB_TOG , LT(_NUM, KC_ESC), MO(_NAV), LT(_MOUSE, KC_TAB), KC_LBRC , KC_RBRC,  LT(_RAISE, KC_ENT), KC_SPC, RALT_T(KC_DEL), TO(_COLEMAK)
       ),
+  /*
+   * Numbers layer
+   *
+   * ,-------------------------------------------.                              ,-------------------------------------------.
+   * |        | Reset|      |      |      |      |                              |  %   | 7 &  | 8 *  | 9 (  |  =   |        |
+   * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+   * |        | Cmd  | Alt  | Ctl  | Sft  |      |                              |  +   | 4 $  | 5 %  | 6 ^  |  -   |        |
+   * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |      |  |      |      |  *   | 1 !  | 2 @  | 3 #  |  /   |        |
+   * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+   *                        |  X   |      |      |      |      |  |      | , <  | 0 )  | . >  |  X   |
+   *                        `----------------------------------'  `----------------------------------'
+   */
+  [_NUM] = LAYOUT_wrapper(
+    XXXXXXX, RESET  , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     KC_PERC, KC_7   , KC_8   , KC_9   , KC_EQL , XXXXXXX,
+    XXXXXXX, ______________MOD_L2_L____________, XXXXXXX,                                     KC_PLUS, KC_4   , KC_5   , KC_6   , KC_MINS , XXXXXXX,
+    XXXXXXX, RESET  , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_ASTR, KC_1   , KC_2   , KC_3   , KC_SLSH, XXXXXXX,
+                               _______, _______, _______, _______, _______, _______, KC_COMM, KC_0   , KC_DOT , _______
+    ),
+
   /*
    * Navigation layer
    *
@@ -237,6 +258,12 @@ static void render_status(void) {
       oled_write_P(PSTR("Q W F P B J L U Y ;\n\n"), false);
       oled_write_P(PSTR("A R S T G M N E I O\n\n"), false);
       oled_write_P(PSTR("Z X C D V K H , . /\n"), false);
+      break;
+    case _NUM:
+      oled_write_P(PSTR("NUM\n\n"), false);
+      oled_write_P(PSTR("_ _ _ _ _ % 7 8 9 =\n\n"), false);
+      oled_write_P(PSTR("_ _ _ _ _ + 4 5 6 -\n\n"), false);
+      oled_write_P(PSTR("_ _ _ _ _ * 1 2 3 /\n"), false);
       break;
     case _NAV:
       oled_write_P(PSTR("Navigation\n\n"), false);
