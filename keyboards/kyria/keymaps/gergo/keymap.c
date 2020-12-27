@@ -19,7 +19,6 @@
 enum layers {
     _QWERTY = 0,
     _COLEMAK,
-    _LOWER,
     _NAV,
     _MOUSE,
     _RAISE,
@@ -48,25 +47,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_BSPC, _____________MOD_QWERTY_L2_________________,                                         _____________MOD_QWERTY_R2_________________, KC_QUOT,
       KC_LSFT, _________________QWERTY_L3_________________, KC_LBRC , KC_LPRN , KC_RPRN , KC_RBRC , _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
                RGB_TOG , KC_GESC, MO(_NAV),       LT(_MOUSE, KC_TAB), KC_LBRC,  KC_RBRC, LT(_RAISE, KC_ENT), KC_SPC, RALT_T(KC_DEL), TO(_COLEMAK)
-      ),
-  /*
-   * Lower Layer: Media, Navigation
-   *
-   * ,-------------------------------------------.                              ,-------------------------------------------.
-   * |        |      |      |      |      |      |                              | Home | PgUp | PgDn | End  |      |   =    |
-   * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-   * |        |      | Prev | Play | Next | VolUp|                              | Left | Down | Up   | Right|      |  ] }   |
-   * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-   * |        |      |      |      | Mute | VolDn|      |      |  |      |      | WLeft|      |      |WRight|      |  [ {   |
-   * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-   *                        |      |      |      |      |      |  |Miss.C|NextS.|      |      |      |
-   *                        `----------------------------------'  `----------------------------------'
-   */
-  [_LOWER] = LAYOUT_wrapper(
-      _______, _______, _______, _______, _______, _______,                                     KC_HOME, KC_PGUP, KC_PGDN, KC_END , _______, KC_EQL,
-      _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLU,                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, KC_LBRC,
-      _______, _______, _______, _______, KC_MUTE, KC_VOLD, _______, _______, _______, _______, A(KC_LEFT), _______, _______, A(KC_RGHT), _______, KC_RBRC,
-                                 _______, _______, _______, _______, _______, MC_EXPO, MC_NEXT, _______, _______, _______
       ),
   /*
    * Navigation layer
