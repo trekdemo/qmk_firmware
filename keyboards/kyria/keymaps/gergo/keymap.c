@@ -21,6 +21,7 @@ enum layers {
     _COLEMAK,
     _LOWER,
     _NAV,
+    _MOUSE,
     _RAISE,
     _ADJUST
 };
@@ -46,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB,  _________________QWERTY_L1_________________,                                         _________________QWERTY_R1_________________, KC_BSLASH,
       KC_BSPC, _____________MOD_QWERTY_L2_________________,                                         _____________MOD_QWERTY_R2_________________, KC_QUOT,
       KC_LSFT, _________________QWERTY_L3_________________, KC_LBRC , KC_LPRN , KC_RPRN , KC_RBRC , _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
-      RGB_TOG , KC_GESC, KC_LCMD, MO(_NAV), MO(_RAISE),                         MO(_NAV), LT(_RAISE, KC_ENT), KC_SPC, RALT_T(KC_DEL), TO(_COLEMAK)
+      RGB_TOG , KC_GESC, KC_LCMD, MO(_NAV), LT(_MOUSE, KC_TAB),                 MO(_NAV), LT(_RAISE, KC_ENT), KC_SPC, RALT_T(KC_DEL), TO(_COLEMAK)
       ),
   /*
    * Lower Layer: Media, Navigation
@@ -87,6 +88,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, _______, _______, _______, _______, MC_EXPO, MC_NEXT, _______, _______, _______
       ),
 
+  /*
+   * Mouse layer
+   *
+   * ,-------------------------------------------.                              ,-------------------------------------------.
+   * |        | Reset|      |      |      |      |                              |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+   * |        | Cmd  | Alt  | Ctl  | Sft  |      |                              | Left | Down | Up   | Right|      |        |
+   * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |      |  |      |      |WH Lft|WH Up |WH Dw |WH Rgt|      |        |
+   * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+   *                        |      |      |      |      |      |  |      |      |      |      |      |
+   *                        |      |      |      |      |      |  |      |      |      |      |      |
+   *                        `----------------------------------'  `----------------------------------'
+   */
+  [_MOUSE] = LAYOUT_wrapper(
+    XXXXXXX, RESET  , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, ______________MOD_L2_L____________, XXXXXXX,                                     KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX, XXXXXXX,
+                               _______, _______, _______, _______, _______, _______, KC_BTN1, KC_BTN2, KC_BTN3, _______
+  ),
   /*
    * Raise Layer: Numbers, Symbols
    *
@@ -244,6 +265,12 @@ static void render_status(void) {
       oled_write_P(PSTR("R _ _ _ _ R P C X U\n\n"), false);
       oled_write_P(PSTR("_ _ _ _ _ < v ^ > C\n\n"), false);
       oled_write_P(PSTR("_ _ _ _ _ H D U E I\n"), false);
+      break;
+    case _MOUSE:
+      oled_write_P(PSTR("MOUSE\n\n"), false);
+      oled_write_P(PSTR("_ _ _ _ _ _ _ _ _ _\n\n"), false);
+      oled_write_P(PSTR("Cursor:   < v ^ > _\n\n"), false);
+      oled_write_P(PSTR("Wheel:    < ^ V > _\n"), false);
       break;
     case _RAISE:
       oled_write_P(PSTR("RAISE\n\n"), false);
