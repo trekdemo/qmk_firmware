@@ -20,6 +20,7 @@ enum layers {
     _QWERTY = 0,
     _COLEMAK,
     _LOWER,
+    _NAV,
     _RAISE,
     _ADJUST
 };
@@ -38,14 +39,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | LShift |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      | RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        | RGB  | Esc  |      |      |      |  |      | Enter| Space| Del  |Colema|
- *                        | TOGGL| ` ~  | Cmd  | Lower| Raise|  | Lower| Raise|      |      | Toggl|
+ *                        | TOGGL| ` ~  | Cmd  | Nav  | Raise|  | Nav  | Raise|      |      | Toggl|
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT_wrapper(
       KC_TAB,  _________________QWERTY_L1_________________,                                         _________________QWERTY_R1_________________, KC_BSLASH,
       KC_BSPC, _____________MOD_QWERTY_L2_________________,                                         _____________MOD_QWERTY_R2_________________, KC_QUOT,
       KC_LSFT, _________________QWERTY_L3_________________, KC_LBRC , KC_LPRN , KC_RPRN , KC_RBRC , _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
-      RGB_TOG , KC_GESC, KC_LCMD, MO(_LOWER), MO(_RAISE),                       MO(_LOWER), LT(_RAISE, KC_ENT), KC_SPC, RALT_T(KC_DEL), TO(_COLEMAK)
+      RGB_TOG , KC_GESC, KC_LCMD, MO(_NAV), MO(_RAISE),                         MO(_NAV), LT(_RAISE, KC_ENT), KC_SPC, RALT_T(KC_DEL), TO(_COLEMAK)
       ),
   /*
    * Lower Layer: Media, Navigation
@@ -66,6 +67,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, _______, _______, KC_MUTE, KC_VOLD, _______, _______, _______, _______, A(KC_LEFT), _______, _______, A(KC_RGHT), _______, KC_RBRC,
                                  _______, _______, _______, _______, _______, MC_EXPO, MC_NEXT, _______, _______, _______
       ),
+  /*
+   * Navigation layer
+   *
+   * ,-------------------------------------------.                              ,-------------------------------------------.
+   * |        | Reset|      |      |      |      |                              | Undo |Paste | Copy | Cut  | Redo |        |
+   * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+   * |        | Cmd  | Alt  | Ctl  | Sft  |      |                              | Left | Down | Up   | Right| Caps |        |
+   * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |      |  |      |      | Home | PgDw | PgUp | End  | Ins  |        |
+   * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+   *                        |      |      |      |      |      |  |Expose|NextS.|      |      |      |
+   *                        `----------------------------------'  `----------------------------------'
+   */
+  [_NAV] = LAYOUT_wrapper(
+      XXXXXXX, RESET  , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     U_UNDO , U_PASTE, U_COPY , U_CUT  , U_REDO , XXXXXXX,
+      XXXXXXX, ______________MOD_L2_L____________, XXXXXXX,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_CAPS, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END , KC_INS , XXXXXXX,
+                                 _______, _______, _______, _______, _______, MC_EXPO, MC_NEXT, _______, _______, _______
+      ),
 
   /*
    * Raise Layer: Numbers, Symbols
@@ -77,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
    * |        |      |      |  `   |  ~   |  =   |      |      |  |      |      |  -   |  +   |  /   |  *   |  %   |  [ {   |
    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-   *                        |      |      |      |PrevS.|Miss.C|  |      |      |      |      |      |
+   *                        |      |      |      |PrevS.|App.Ex|  |      |      |      |      |      |
    *                        `----------------------------------'  `----------------------------------'
    */
   [_RAISE] = LAYOUT_wrapper(
@@ -188,10 +208,10 @@ void keyboard_post_init_user(void) { rgblight_layers = my_rgb_layers; }
 #endif
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-  layer_state_t new_state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+  layer_state_t new_state = update_tri_layer_state(state, _NAV, _RAISE, _ADJUST);
 
 #ifdef RGBLIGHT_LAYERS
-  rgblight_set_layer_state(0, layer_state_cmp(new_state, _LOWER));
+  rgblight_set_layer_state(0, layer_state_cmp(new_state, _NAV));
   rgblight_set_layer_state(1, layer_state_cmp(new_state, _RAISE));
   rgblight_set_layer_state(2, layer_state_cmp(new_state, _ADJUST));
 #endif
@@ -219,11 +239,11 @@ static void render_status(void) {
       oled_write_P(PSTR("A R S T G M N E I O\n\n"), false);
       oled_write_P(PSTR("Z X C D V K H , . /\n"), false);
       break;
-    case _LOWER:
-      oled_write_P(PSTR("LOWER\n\n"), false);
-      oled_write_P(PSTR("_ _ _ _ _ _ _ _ _ _\n\n"), false);
-      oled_write_P(PSTR("_ _ _ _ _ < v ^ > _\n\n"), false);
-      oled_write_P(PSTR("_ _ _ _ _ _ _ _ _ _\n"), false);
+    case _NAV:
+      oled_write_P(PSTR("Navigation\n\n"), false);
+      oled_write_P(PSTR("R _ _ _ _ R P C X U\n\n"), false);
+      oled_write_P(PSTR("_ _ _ _ _ < v ^ > C\n\n"), false);
+      oled_write_P(PSTR("_ _ _ _ _ H D U E I\n"), false);
       break;
     case _RAISE:
       oled_write_P(PSTR("RAISE\n\n"), false);

@@ -1,5 +1,11 @@
 #pragma once
 
+#define U_REDO  SCMD(KC_Z)
+#define U_PASTE LCMD(KC_V)
+#define U_COPY  LCMD(KC_C)
+#define U_CUT   LCMD(KC_X)
+#define U_UNDO  LCMD(KC_Z)
+
 #define MC_EXPO C(KC_UP)
 #define MC_AXPO C(KC_DOWN)
 #define MC_NEXT C(KC_RGHT)
@@ -8,18 +14,22 @@
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
 
-// == Numbers & Symbols ========================================================
 // ,-----------------------------.   ,-----------------------------.
 // |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |
 #define ________________SYMBOLS_L__________________  KC_EXLM, KC_AT, KC_HASH, KC_DLR,  KC_PERC
 #define ________________SYMBOLS_R__________________  KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN
 
-// Layout parts for easy reuse between keyboard keymaps
 // ,-----+-----+-----+-----+-----,   ,-----+-----+-----+-----+-----,
 // |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
 // ,-----+-----+-----+-----+-----,   ,-----+-----+-----+-----+-----,
 #define ________________NUMBERS_L__________________  KC_1, KC_2, KC_3, KC_4, KC_5
 #define ________________NUMBERS_R__________________  KC_6, KC_7, KC_8, KC_9, KC_0
+
+//  ,------+------+------+------,    ,------+------+------+------,
+//  | Cmd  | Alt  | Ctl  | Sft  |    | Sft  | Ctl  | Alt  | Cmd  |
+//  ,------+------+------+------,    ,------+------+------+------,
+#define ______________MOD_L2_L____________  KC_LCMD, KC_LOPT, KC_LCTL, KC_LSFT
+#define ______________MOD_L2_R____________  KC_RSFT, KC_RCTL, KC_ROPT, KC_RCMD
 
 // Qwerty mod-row
 #define QW_A    LCMD_T(KC_A)
