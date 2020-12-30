@@ -104,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, RESET  , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, ______________MOD_L2_L____________, XXXXXXX,                                     KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX, XXXXXXX,
-                               _______, _______, _______, _______, _______, _______, KC_BTN1, KC_BTN2, KC_BTN3, _______
+                               _______, _______, _______, _______, _______, _______, KC_BTN3, KC_BTN1, KC_BTN2, _______
   ),
   /*
    * Raise Layer: Numbers, Symbols
@@ -335,7 +335,8 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   }
   else if (index == 1) {
     switch (get_highest_layer(layer_state)) {
-      case _RAISE:
+      case _NAV:
+      case _MOUSE:
         clockwise ? tap_code(KC_MS_WH_DOWN) : tap_code(KC_MS_WH_UP);
         break;
       default:
