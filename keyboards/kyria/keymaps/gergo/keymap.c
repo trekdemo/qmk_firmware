@@ -336,11 +336,13 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   else if (index == 1) {
     switch (get_highest_layer(layer_state)) {
       case _NAV:
+        clockwise ? tap_code(KC_PGUP) : tap_code(KC_PGDN);
+        break;
       case _MOUSE:
-        clockwise ? tap_code(KC_MS_WH_DOWN) : tap_code(KC_MS_WH_UP);
+        clockwise ? tap_code(KC_MS_WH_LEFT) : tap_code(KC_MS_WH_RIGHT);
         break;
       default:
-        clockwise ? tap_code(KC_PGUP) : tap_code(KC_PGDN);
+        clockwise ? tap_code(KC_MS_WH_DOWN) : tap_code(KC_MS_WH_UP);
         break;
     }
   }
