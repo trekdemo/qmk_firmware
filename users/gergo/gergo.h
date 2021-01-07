@@ -34,14 +34,14 @@
 // == Home-row Mod helpers =====================================================
 // Finger numbering starts with 1 with the thumb and goes til 5 pinky
 //  ,------+------+------+------,    ,------+------+------+------,
-//  | Cmd  | Alt  | Ctl  | Sft  |    | Sft  | Ctl  | Alt  | Cmd  |
+//  | Cmd  | Ctl  | Alt  | Sft  |    | Sft  | Alt  | Ctl  | Cmd  |
 //  ,------+------+------+------,    ,------+------+------+------,
-#define ______________MOD_L2_L____________  KC_LCMD, KC_LOPT, KC_LCTL, KC_LSFT
-#define ______________MOD_L2_R____________  KC_RSFT, KC_RCTL, KC_ROPT, KC_RCMD
+#define ______________MOD_L2_L____________  KC_LCMD, KC_LCTL, KC_LOPT, KC_LSFT
+#define ______________MOD_L2_R____________  KC_RSFT, KC_ROPT, KC_RCTL, KC_RCMD
 
 #define FI5(kc) LCMD_T(kc)
-#define FI4(kc) LALT_T(kc)
-#define FI3(kc) LCTL_T(kc)
+#define FI4(kc) LCTL_T(kc)
+#define FI3(kc) LALT_T(kc)
 #define FI2(kc) LSFT_T(kc)
 
 // == QWERTY ===================================================================
