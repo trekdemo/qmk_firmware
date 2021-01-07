@@ -6,6 +6,12 @@
 #define U_CUT   LCMD(KC_X)
 #define U_UNDO  LCMD(KC_Z)
 
+#define CMD_TAB  LCMD(KC_TAB)
+#define SEL_ALL  LCMD(KC_A)
+#define WIN_CLO  LCMD(KC_W)
+#define APP_CLO  LCMD(KC_Q)
+#define APP_TAB  LCMD(KC_T)
+
 #define MC_EXPO C(KC_UP)
 #define MC_AXPO C(KC_DOWN)
 #define MC_NEXT C(KC_RGHT)

@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | BSpc   |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |   Z  |   X  |   C  |   V  |   B  | [ {  |  (   |  |   )  | ] }  |   N  |   M  | ,  < | . >  | /  ? |  - _   |
+ * |        |   Z  |   X  |   C  |   V  |   B  |  {   |  (   |  |   )  |  }   |   N  |   M  | ,  < | . >  | /  ? |  - _   |
  * | LShift |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      | RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        | RGB  | Esc  |      | Tab  |      |  |      | Enter| Space| Del  |Colema|
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_wrapper(
       KC_TAB,  _________________QWERTY_L1_________________,                                         _________________QWERTY_R1_________________, KC_BSLASH,
       KC_BSPC, _____________MOD_QWERTY_L2_________________,                                         _____________MOD_QWERTY_R2_________________, KC_QUOT,
-      KC_LSFT, _________________QWERTY_L3_________________, KC_LBRC , KC_LPRN , KC_RPRN , KC_RBRC , _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
+      KC_LSFT, _________________QWERTY_L3_________________, KC_LCBR, KC_LPRN , KC_RPRN,  KC_RCBR,   _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
            RGB_TOG , LT(_NUM, KC_ESC), MO(_NAV), LT(_MOUSE, KC_TAB), KC_LBRC , KC_RBRC,  LT(_RAISE, KC_ENT), KC_SPC, RALT_T(KC_DEL), TO(_COLEMAK)
       ),
   /*
@@ -72,9 +72,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * Navigation layer
    *
    * ,-------------------------------------------.                              ,-------------------------------------------.
-   * |        | Reset|      |      |      |      |                              | Undo |Paste | Copy | Cut  | Redo |        |
+   * | Cmd+Tab| Cmd+Q| Cmd+W|      |      | Cmd+T|                              | Undo | Redo | Cut  | Copy | Paste|        |
    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-   * |        | Cmd  | Alt  | Ctl  | Sft  |      |                              |   ←  |  ↓   |  ↑   |  →   | Caps |        |
+   * | Cmd+A  | Cmd  | Alt  | Ctl  | Sft  |      |                              |   ←  |  ↓   |  ↑   |  →   | Caps |        |
    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
    * |        |      |      |      |      |      |      |      |  |      |      | Home | PgDn | PgUp | End  | Ins  |        |
    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -82,9 +82,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                        `----------------------------------'  `----------------------------------'
    */
   [_NAV] = LAYOUT_wrapper(
-      XXXXXXX, RESET  , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     U_UNDO , U_PASTE, U_COPY , U_CUT  , U_REDO , XXXXXXX,
-      XXXXXXX, ______________MOD_L2_L____________, XXXXXXX,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_CAPS, XXXXXXX,
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END , KC_INS , XXXXXXX,
+      CMD_TAB, APP_CLO, WIN_CLO, XXXXXXX, U_REDO , APP_TAB,                                     U_UNDO , U_REDO , U_CUT  , U_COPY , U_PASTE, XXXXXXX,
+      SEL_ALL, ______________MOD_L2_L____________, XXXXXXX,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_CAPS, XXXXXXX,
+      XXXXXXX, U_UNDO , U_CUT  , U_COPY , U_PASTE, XXXXXXX, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END , KC_INS , XXXXXXX,
                                  _______, _______, _______, _______, _______, MC_EXPO, MC_NEXT, _______, _______, _______
       ),
   /*
