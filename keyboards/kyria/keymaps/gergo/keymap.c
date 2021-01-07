@@ -52,19 +52,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * Numbers layer
    *
    * ,-------------------------------------------.                              ,-------------------------------------------.
-   * |        | Reset|      |      |      |      |                              |  %   | 7 &  | 8 *  | 9 (  |  =   |        |
+   * |        |      |      |      |      |      |                              |  %   | 7 &  | 8 *  | 9 (  |  =   |        |
    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
    * |        | Cmd  | Alt  | Ctl  | Sft  |      |                              |  +   | 4 $  | 5 %  | 6 ^  |  -   |        |
    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |      |  |      |      |  *   | 1 !  | 2 @  | 3 #  |  /   |        |
+   * |        |      |      |      |      |      | Reset|      |  |      |      |  *   | 1 !  | 2 @  | 3 #  |  /   |        |
    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
    *                        |  X   |      |      |      |      |  |      | , <  | 0 )  | . >  |  X   |
    *                        `----------------------------------'  `----------------------------------'
    */
   [_NUM] = LAYOUT_wrapper(
-    XXXXXXX, RESET  , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     KC_PERC, KC_7   , KC_8   , KC_9   , KC_EQL , XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     KC_PERC, KC_7   , KC_8   , KC_9   , KC_EQL , XXXXXXX,
     XXXXXXX, ______________MOD_L2_L____________, XXXXXXX,                                     KC_PLUS, KC_4   , KC_5   , KC_6   , KC_MINS , XXXXXXX,
-    XXXXXXX, RESET  , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_ASTR, KC_1   , KC_2   , KC_3   , KC_SLSH, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET  , _______, _______, _______, KC_ASTR, KC_1   , KC_2   , KC_3   , KC_SLSH, XXXXXXX,
                                _______, _______, _______, _______, _______, _______, KC_COMM, KC_0   , KC_DOT , _______
     ),
 
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
    * | Cmd+A  | Cmd  | Alt  | Ctl  | Sft  |      |                              |   ←  |  ↓   |  ↑   |  →   | Caps |        |
    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |      |  |      |      | Home | PgDn | PgUp | End  | Ins  |        |
+   * |        |      |      |      |      |      | Reset|      |  |      |      | Home | PgDn | PgUp | End  | Ins  |        |
    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
    *                        |      |      |      |      |      |  |Expose|NextS.|      |      |      |
    *                        `----------------------------------'  `----------------------------------'
@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NAV] = LAYOUT_wrapper(
       CMD_TAB, APP_CLO, WIN_CLO, XXXXXXX, U_REDO , APP_TAB,                                     U_UNDO , U_REDO , U_CUT  , U_COPY , U_PASTE, XXXXXXX,
       SEL_ALL, ______________MOD_L2_L____________, XXXXXXX,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_CAPS, XXXXXXX,
-      XXXXXXX, U_UNDO , U_CUT  , U_COPY , U_PASTE, XXXXXXX, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END , KC_INS , XXXXXXX,
+      XXXXXXX, U_UNDO , U_CUT  , U_COPY , U_PASTE, XXXXXXX, RESET  , _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END , KC_INS , XXXXXXX,
                                  _______, _______, _______, _______, _______, MC_EXPO, MC_NEXT, _______, _______, _______
       ),
   /*
@@ -95,15 +95,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
    * |        | Cmd  | Alt  | Ctl  | Sft  |      |                              |   ←  |  ↓   |  ↑   |  →   |      |        |
    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-   * |        |      |      |      |      |      |      |      |  |      |      | WH ← | WH ↑ | WH ↓ | WH → |      |        |
+   * |        |      |      |      |      |      | Reset|   |  |      |      | WH ← | WH ↑ | WH ↓ | WH → |      |        |
    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
    *                        |      |      |      |      |      |  |      | Btn1 | Btn2 | Btn3 |      |
    *                        `----------------------------------'  `----------------------------------'
    */
   [_MOUSE] = LAYOUT_wrapper(
-    XXXXXXX, RESET  , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, ______________MOD_L2_L____________, XXXXXXX,                                     KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET  , _______, _______, _______, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX, XXXXXXX,
                                _______, _______, _______, _______, _______, _______, KC_BTN3, KC_BTN1, KC_BTN2, _______
   ),
   /*
