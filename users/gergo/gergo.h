@@ -1,5 +1,25 @@
 #pragma once
 
+#define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
+
+enum layers {
+  _QWERTY = 0,
+  _COLEMAK,
+  _NUM,
+  _NAV,
+  _MOUSE,
+  _RAISE,
+  _ADJUST
+};
+
+#define TO_QWER TO(_QWERTY)
+#define TO_COLM TO(_COLEMAK)
+
+#define NUM_ESC LT(_NUM, KC_ESC)
+#define NAV____ MO(_NAV)
+#define MOU_TAB LT(_MOUSE, KC_TAB)
+#define RSE_ENT LT(_RAISE, KC_ENT)
+
 #define U_REDO  SCMD(KC_Z)
 #define U_PASTE LCMD(KC_V)
 #define U_COPY  LCMD(KC_C)
@@ -10,15 +30,12 @@
 #define SEL_ALL  LCMD(KC_A)
 #define WIN_CLO  LCMD(KC_W)
 #define APP_CLO  LCMD(KC_Q)
-#define APP_TAB  LCMD(KC_T)
+#define CMD_KCT  LCMD(KC_T)
 
 #define MC_EXPO C(KC_UP)
 #define MC_AXPO C(KC_DOWN)
 #define MC_NEXT C(KC_RGHT)
 #define MC_PREV C(KC_LEFT)
-
-#define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
-
 
 // ,-----------------------------.   ,-----------------------------.
 // |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |
@@ -30,6 +47,9 @@
 // ,-----+-----+-----+-----+-----,   ,-----+-----+-----+-----+-----,
 #define ________________NUMBERS_L__________________  KC_1, KC_2, KC_3, KC_4, KC_5
 #define ________________NUMBERS_R__________________  KC_6, KC_7, KC_8, KC_9, KC_0
+
+#define ________________FUNCTION_L_________________  KC_F1, KC_F2, KC_F3, KC_F4, KC_F5
+#define ________________FUNCTION_R_________________  KC_F6, KC_F7, KC_F8, KC_F9, KC_F10
 
 // == Home-row Mod helpers =====================================================
 // Finger numbering starts with 1 with the thumb and goes til 5 pinky

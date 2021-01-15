@@ -16,16 +16,6 @@
 #include QMK_KEYBOARD_H
 #include "gergo.h"
 
-enum layers {
-    _QWERTY = 0,
-    _COLEMAK,
-    _NUM,
-    _NAV,
-    _MOUSE,
-    _RAISE,
-    _ADJUST
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * Base Layer: QWERTY
@@ -43,10 +33,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT_wrapper(
-      KC_TAB,  _________________QWERTY_L1_________________,                                         _________________QWERTY_R1_________________, KC_BSLASH,
-      KC_BSPC, _____________MOD_QWERTY_L2_________________,                                         _____________MOD_QWERTY_R2_________________, KC_QUOT,
-      KC_LSFT, _________________QWERTY_L3_________________, KC_LCBR, KC_LPRN , KC_RPRN,  KC_RCBR,   _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
-           RGB_TOG , LT(_NUM, KC_ESC), MO(_NAV), LT(_MOUSE, KC_TAB), KC_LBRC , KC_RBRC,  LT(_RAISE, KC_ENT), KC_SPC, RALT_T(KC_DEL), TO(_COLEMAK)
+      KC_TAB,  _________________QWERTY_L1_________________,                                      _________________QWERTY_R1_________________, KC_BSLASH,
+      KC_BSPC, _____________MOD_QWERTY_L2_________________,                                      _____________MOD_QWERTY_R2_________________, KC_QUOT,
+      KC_LSFT, _________________QWERTY_L3_________________, KC_LCBR, KC_LPRN , KC_RPRN, KC_RCBR, _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
+                       RGB_TOG , NUM_ESC, NAV____, MOU_TAB, KC_LBRC, KC_RBRC,  RSE_ENT, KC_SPC , RALT_T(KC_DEL), TO_COLM
       ),
   /*
    * Numbers layer
@@ -82,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                        `----------------------------------'  `----------------------------------'
    */
   [_NAV] = LAYOUT_wrapper(
-      CMD_TAB, APP_CLO, WIN_CLO, XXXXXXX, U_REDO , APP_TAB,                                     U_UNDO , U_REDO , U_CUT  , U_COPY , U_PASTE, XXXXXXX,
+      CMD_TAB, APP_CLO, WIN_CLO, XXXXXXX, U_REDO , CMD_KCT,                                     U_UNDO , U_REDO , U_CUT  , U_COPY , U_PASTE, XXXXXXX,
       SEL_ALL, ______________MOD_L2_L____________, XXXXXXX,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_CAPS, XXXXXXX,
       XXXXXXX, U_UNDO , U_CUT  , U_COPY , U_PASTE, XXXXXXX, RESET  , _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END , KC_INS , XXXXXXX,
                                  _______, _______, _______, _______, _______, MC_EXPO, MC_NEXT, _______, _______, _______
@@ -179,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, ________________COLEMAK_L1_________________,                                     ________________COLEMAK_R1_________________, _______,
       _______, ____________MOD_COLEMAK_L2_________________,                                     ____________MOD_COLEMAK_R2_________________, _______,
       _______, ________________COLEMAK_L3_________________, _______, _______, _______, _______, ________________COLEMAK_R3_________________, _______,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, TO(_QWERTY)
+                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, TO_QWER
       ),
   // /*
   //  * Layer template
