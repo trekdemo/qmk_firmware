@@ -33,10 +33,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT_wrapper(
-      KC_TAB,  _________________QWERTY_L1_________________,                                      _________________QWERTY_R1_________________, KC_BSLASH,
-      KC_BSPC, _____________MOD_QWERTY_L2_________________,                                      _____________MOD_QWERTY_R2_________________, KC_QUOT,
-      KC_LSFT, _________________QWERTY_L3_________________, KC_LCBR, KC_LPRN , KC_RPRN, KC_RCBR, _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
-                       RGB_TOG , NUM_ESC, NAV____, MOU_TAB, KC_LBRC, KC_RBRC,  RSE_ENT, KC_SPC , RALT_T(KC_DEL), TO_COLM
+      KC_TAB,  _________________QWERTY_L1_________________,                                     _________________QWERTY_R1_________________, KC_BSLASH,
+      KC_BSPC, _____________MOD_QWERTY_L2_________________,                                     _____________MOD_QWERTY_R2_________________, KC_QUOT,
+      KC_LSFT, _________________QWERTY_L3_________________, KC_LCBR, KC_LPRN, KC_RPRN, KC_RCBR, _________________QWERTY_R3_________________, RSFT_T(KC_MINS),
+                                 RGB_TOG, _________THUMB_L_________, KC_LBRC, KC_RBRC, _________THUMB_R_________, TO_COLM
       ),
   /*
    * Numbers layer
@@ -52,10 +52,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                        `----------------------------------'  `----------------------------------'
    */
   [_NUM] = LAYOUT_wrapper(
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     KC_PERC, KC_7   , KC_8   , KC_9   , KC_EQL , XXXXXXX,
-    XXXXXXX, ______________MOD_L2_L____________, XXXXXXX,                                     KC_PLUS, KC_4   , KC_5   , KC_6   , KC_MINS , XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET  , _______, _______, _______, KC_ASTR, KC_1   , KC_2   , KC_3   , KC_SLSH, XXXXXXX,
-                               _______, _______, _______, _______, _______, _______, KC_COMM, KC_0   , KC_DOT , _______
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     ________________NUMPAD__L1_________________, XXXXXXX,
+    XXXXXXX, ______________MOD_L2_L____________, XXXXXXX,                                     ________________NUMPAD__L2_________________, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET  , _______, _______, _______, ________________NUMPAD__L3_________________, XXXXXXX,
+                               _______, _______, _______, _______, _______, _______, _______NUMPAD__L4______, _______
     ),
 
   /*

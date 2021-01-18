@@ -19,6 +19,7 @@ enum layers {
 #define NAV____ MO(_NAV)
 #define MOU_TAB LT(_MOUSE, KC_TAB)
 #define RSE_ENT LT(_RAISE, KC_ENT)
+#define ADJ_DEL LT(_ADJUST, KC_DEL)
 
 #define U_REDO  SCMD(KC_Z)
 #define U_PASTE LCMD(KC_V)
@@ -37,6 +38,10 @@ enum layers {
 #define MC_NEXT C(KC_RGHT)
 #define MC_PREV C(KC_LEFT)
 
+
+#define _________THUMB_L_________ NUM_ESC, NAV____, MOU_TAB
+#define _________THUMB_R_________ RSE_ENT, KC_SPC , ADJ_DEL
+
 // ,-----------------------------.   ,-----------------------------.
 // |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |
 #define ________________SYMBOLS_L__________________  KC_EXLM, KC_AT, KC_HASH, KC_DLR,  KC_PERC
@@ -50,6 +55,11 @@ enum layers {
 
 #define ________________FUNCTION_L_________________  KC_F1, KC_F2, KC_F3, KC_F4, KC_F5
 #define ________________FUNCTION_R_________________  KC_F6, KC_F7, KC_F8, KC_F9, KC_F10
+
+#define ________________NUMPAD__L1_________________ KC_PERC, KC_7   , KC_8   , KC_9   , KC_EQL
+#define ________________NUMPAD__L2_________________ KC_PLUS, KC_4   , KC_5   , KC_6   , KC_MINS
+#define ________________NUMPAD__L3_________________ KC_ASTR, KC_1   , KC_2   , KC_3   , KC_SLSH
+#define _______NUMPAD__L4______                     KC_COMM, KC_0   , KC_DOT
 
 // == Home-row Mod helpers =====================================================
 // Finger numbering starts with 1 with the thumb and goes til 5 pinky
