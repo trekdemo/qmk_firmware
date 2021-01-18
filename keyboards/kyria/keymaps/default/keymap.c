@@ -31,7 +31,7 @@ enum custom_keycodes {
     QWERTY,
     COLEMAK,
     DVORAK,
-}
+};
 
 // Aliases for readability
 #define NAV MO(_NAV)
@@ -148,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NAV] = LAYOUT(
-      _______, KC_MPRV, KC_PSCR, KC_SCLK,KC_PAUSE, KC_MUTE,                                     _______,C(KC_LEFT),KC_UP,C(KC_RGHT),   _______, _______,
+      _______, KC_MPRV, KC_PSCR, KC_SLCK,KC_PAUSE, KC_MUTE,                                     _______,C(KC_LEFT),KC_UP,C(KC_RGHT),   _______, _______,
       _______, KC_MPLY, KC_INS , KC_HOME,KC_PGUP , KC_VOLU,                                     _______, KC_LEFT, KC_DOWN, KC_RGHT,    _______, _______,
       _______, KC_MNXT, KC_DEL , KC_END ,KC_PGDN , KC_VOLD, _______, _______, _______, _______, _______,A(KC_LEFT),_______,A(KC_RGHT), _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -168,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_LAYERINDEX] = LAYOUT(
+    [_GAMING] = LAYOUT(
       _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
       _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -243,13 +243,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_DVORAK);
             }
-            break
+            break;
 
         case COLEMAK:
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_COLEMAK_DH);
             }
-            break
+            break;
 
    }
     return true;
