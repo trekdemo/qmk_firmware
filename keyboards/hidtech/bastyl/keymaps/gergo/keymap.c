@@ -26,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB , _________________QWERTY_L1_________________,    _________________QWERTY_R1_________________, KC_BSLASH,
     KC_BSPC, _____________MOD_QWERTY_L2_________________,    _____________MOD_QWERTY_R2_________________, KC_QUOT,
     KC_LSFT, _________________QWERTY_L3_________________,    _________________QWERTY_R3_________________, KC_MINS,
-                               NUM_ESC, NAV____, MOU_TAB,    RSE_ENT, KC_SPC , KC_DEL ,
+                               _________THUMB_L_________,    _________THUMB_R_________,
                                         KC_LBRC, KC_LPRN,    KC_RPRN, KC_RBRC
   ),
 
@@ -41,10 +41,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUM] = LAYOUT_wrapper(
     _______, _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_PLUS, KC_4   , KC_5   , KC_6   , KC_MINS, _______,
-    _______, ______________MOD_L2_L____________, XXXXXXX,   KC_ASTR, KC_1   , KC_2   , KC_3   , KC_SLSH, _______,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_COMM, KC_0   , KC_0   , KC_DOT , XXXXXXX, _______,
-                               _______, _______, _______,   _______, _______, _______,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   ________________NUMPAD__L1_________________, _______,
+    _______, ______________MOD_L2_L____________, XXXXXXX,   ________________NUMPAD__L2_________________, _______,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   ________________NUMPAD__L3_________________, _______,
+                               _______, _______, _______,   _______NUMPAD__L4______,
                                         _______, RESET  ,   _______, _______
   ),
 
@@ -79,13 +79,50 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______,
     _______, RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,  _______, _______, _______, _______, _______, _______,
     _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______, _______, _______, _______, _______, _______,
-                               _______, _______, _______,  _______, _______, _______,
+                               TO_COLM, TO_QWER, _______,  _______, _______, _______,
                                         _______, RESET  ,  _______, _______
   )
 };
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-  layer_state_t new_state = update_tri_layer_state(state, _NAV, _RAISE, _ADJUST);
+#ifdef RGBLIGHT_LAYERS
+const rgblight_segment_t PROGMEM red_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 37, HSV_RED});
+const rgblight_segment_t PROGMEM green_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 37, HSV_GREEN});
+const rgblight_segment_t PROGMEM blue_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 37, HSV_BLUE});
+const rgblight_segment_t PROGMEM purple_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 37, HSV_PURPLE});
+const rgblight_segment_t PROGMEM turquoise_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 37, HSV_TURQUOISE});
+// Now define the array of layers. Later layers take precedence
+const rgblight_segment_t* const PROGMEM light_layers[] = RGBLIGHT_LAYERS_LIST(
+  red_layer, green_layer, blue_layer, purple_layer, turquoise_layer
+);
 
-  return new_state;
+void keyboard_post_init_user(void) {
+  rgblight_layers = light_layers;
 }
+
+void set_rgblight_layer(layer_state_t state) {
+  rgblight_set_layer_state(0, layer_state_cmp(state, _NUM));
+  rgblight_set_layer_state(1, layer_state_cmp(state, _NAV));
+  rgblight_set_layer_state(2, layer_state_cmp(state, _MOUSE));
+  rgblight_set_layer_state(3, layer_state_cmp(state, _RAISE));
+  // Don't set light layer for ajust in order to set other lighting effects.
+  // rgblight_set_layer_state(4, layer_state_cmp(state, _ADJUST));
+}
+#endif
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+  /* layer_state_t new_state = update_tri_layer_state(state, _NUM, _NAV, _MOUSE); */
+
+#ifdef RGBLIGHT_LAYERS
+  set_rgblight_layer(state);
+#endif
+
+  return state;
+}
+
+// void keyboard_post_init_user(void) {
+//   // Customise these values to desired behaviour
+//   debug_enable=true;
+//   debug_matrix=true;
+//   debug_keyboard=true;
+//   //debug_mouse=true;
+// }
