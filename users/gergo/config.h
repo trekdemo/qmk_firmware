@@ -7,6 +7,7 @@
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
 #undef PERMISSIVE_HOLD
+#define TAPPING_FORCE_HOLD
 
 // Mouse key speed and acceleration.
 #undef MOUSEKEY_DELAY
