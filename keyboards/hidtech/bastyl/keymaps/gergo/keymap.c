@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_BSPC, _____________MOD_QWERTY_L2_________________,    _____________MOD_QWERTY_R2_________________, KC_QUOT,
     KC_LSFT, _________________QWERTY_L3_________________,    _________________QWERTY_R3_________________, KC_MINS,
                                _________THUMB_L_________,    _________THUMB_R_________,
-                                        KC_LBRC, KC_LPRN,    KC_RPRN, KC_RBRC
+                                        KC_LBRC, XXXXXXX,    KC_RPRN, KC_RBRC
   ),
 
   [_COLEMAK] = LAYOUT_wrapper(
