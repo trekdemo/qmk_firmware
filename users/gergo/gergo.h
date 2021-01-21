@@ -6,6 +6,7 @@ enum layers {
   _QWERTY = 0,
   _COLEMAK,
   _NUM,
+  _SYM,
   _NAV,
   _MOUSE,
   _RAISE,
@@ -19,7 +20,8 @@ enum layers {
 #define NAV____ MO(_NAV)
 #define MOU_TAB LT(_MOUSE, KC_TAB)
 #define RSE_ENT LT(_RAISE, KC_ENT)
-#define ADJ_DEL LT(_ADJUST, KC_DEL)
+#define SYM_SPC LT(_SYM, KC_SPC)
+#define ADJ_BSP LT(_ADJUST, KC_BSPC)
 
 #define U_REDO  SCMD(KC_Z)
 #define U_PASTE LCMD(KC_V)
@@ -38,14 +40,20 @@ enum layers {
 #define MC_NEXT C(KC_RGHT)
 #define MC_PREV C(KC_LEFT)
 
+//  ----+-----+-----+-----.   .-----+-----+-----+----
+// Hold | NUM | NAV | MOU |   | RSE | SYM | ADJ |
+// Tap  | Esc |     | Tab |   | Ent | Spc | Bsp |
+//      '-----+-----+-----'   '-----+-----+-----'
 
 #define _________THUMB_L_________ NUM_ESC, NAV____, MOU_TAB
-#define _________THUMB_R_________ RSE_ENT, KC_SPC , ADJ_DEL
+#define _________THUMB_R_________ RSE_ENT, SYM_SPC, ADJ_BSP
 
-// ,-----------------------------.   ,-----------------------------.
-// |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |
-#define ________________SYMBOLS_L__________________  KC_EXLM, KC_AT, KC_HASH, KC_DLR,  KC_PERC
-#define ________________SYMBOLS_R__________________  KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN
+// ,-----+-----+-----+-----+-----,   ,-----+-----+-----+-----+-----,
+// | F1  | F2  | F3  | F4  | F5  |   | F6  | F7  | F8  | F9  | F10 |
+// ,-----+-----+-----+-----+-----,   ,-----+-----+-----+-----+-----,
+#define ________________FUNCTION_L_________________  KC_F1, KC_F2, KC_F3, KC_F4, KC_F5
+#define ________________FUNCTION_R_________________  KC_F6, KC_F7, KC_F8, KC_F9, KC_F10
+
 
 // ,-----+-----+-----+-----+-----,   ,-----+-----+-----+-----+-----,
 // |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
@@ -53,24 +61,40 @@ enum layers {
 #define ________________NUMBERS_L__________________  KC_1, KC_2, KC_3, KC_4, KC_5
 #define ________________NUMBERS_R__________________  KC_6, KC_7, KC_8, KC_9, KC_0
 
-#define ________________FUNCTION_L_________________  KC_F1, KC_F2, KC_F3, KC_F4, KC_F5
-#define ________________FUNCTION_R_________________  KC_F6, KC_F7, KC_F8, KC_F9, KC_F10
-
-
-// ,-----+-----+-----+-----+-----.
+// ,-----------------------------.
 // |  %  |  7  |  8  |  9  |  =  |
-// +-----x-----x-----+-----+-----+
+// |-----x-----x-----+-----+-----|
 // |  +  |  4  |  5  |  6  |  -  |
-// +-----x-----x-----+-----+-----+
+// |-----x-----x-----+-----+-----|
 // |  *  |  1  |  2  |  3  |  /  |
-// \_____+_____+_____+_____+_____/
+// '-----------------------------'
 // .-----+-----+-----.
 // | Ent |  0  |  .  |
-// \_____+_____+_____/
+// '-----+-----+-----'
 #define ________________NUMPAD__L1_________________ KC_PERC, KC_7   , KC_8   , KC_9   , KC_EQL
 #define ________________NUMPAD__L2_________________ KC_PLUS, KC_4   , KC_5   , KC_6   , KC_MINS
 #define ________________NUMPAD__L3_________________ KC_ASTR, KC_1   , KC_2   , KC_3   , KC_SLSH
 #define _______NUMPAD__L4______                     KC_ENT , KC_0   , KC_DOT
+
+
+// ,-----------------------------.   ,-----------------------------.
+// |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |
+#define ________________SYMBOLS_L__________________  KC_EXLM, KC_AT  , KC_HASH, KC_DLR,  KC_PERC
+#define ________________SYMBOLS_R__________________  KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN
+// ,-----+-----+-----+-----+-----.
+// |  !  |  @  |  #  |  $  |  %  |
+// +-----x-----x-----+-----+-----+
+// |  ^  |  &  |  *  |  (  |  )  |
+// +-----x-----x-----+-----+-----+
+// |  `  |  ~  |  -  |  {  |  }  |
+// \_____+_____+_____+_____+_____/
+//             .-----+-----+-----.
+//             |  =  |  [  |  ]  |
+//             \_____+_____+_____/
+#define ________________SYMBOLS_1__________________ KC_EXLM, KC_AT  , KC_HASH, KC_DLR , KC_PERC
+#define ________________SYMBOLS_2__________________ KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN
+#define ________________SYMBOLS_3__________________ KC_GRV , KC_TILD, KC_MINS, KC_LCBR, KC_RCBR
+#define                   ________SYMBOLS_4________                   KC_EQL , KC_LBRC, KC_RBRC
 
 // == Home-row Mod helpers =====================================================
 //  ,------+------+------+------,    ,------+------+------+------,

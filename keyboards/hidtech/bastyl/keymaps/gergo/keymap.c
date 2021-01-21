@@ -48,6 +48,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         _______, RESET  ,   _______, _______
   ),
 
+  [_SYM] = LAYOUT_wrapper(
+    _______, _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______,
+    _______, ________________SYMBOLS_1__________________,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+    _______, ________________SYMBOLS_2__________________,   XXXXXXX, ______________MOD_L2_R____________, _______,
+    _______, ________________SYMBOLS_3__________________,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+                               ________SYMBOLS_4________,   _______, _______, _______,
+                                        _______, _______,   RESET  , _______
+  ),
+
   [_NAV] = LAYOUT_wrapper(
     _______, _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______,
     CMD_TAB, APP_CLO, WIN_CLO, XXXXXXX, U_REDO , CMD_KCT,   U_UNDO , U_REDO , U_CUT  , U_COPY , U_PASTE, XXXXXXX,
