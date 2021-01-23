@@ -313,6 +313,9 @@ static void render_status(void) {
         case _NAV:
             oled_write_P(PSTR("Nav\n"), false);
             break;
+        case _FUNCTION:
+            oled_write_P(PSTR("Function\n"), false);
+            break;
         case _GAMING:
             oled_write_P(PSTR("Gaming\n"), false);
             break;
