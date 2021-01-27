@@ -135,9 +135,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Nav Layer: Media, navigation
  * 
  * ,-------------------------------------------.                              ,-------------------------------------------. 
- * |        |      |Ctrl+←|  ↑   |Ctrl+→|      |                              |M Prev| PrtSc| ScLck| Pause|VolMut|        | 
+ * |        |      |Ctrl+←|  ↑   |Ctrl+→|      |                              |M Play| PrtSc| ScLck| Pause|VolMut| Delete | 
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------| 
- * |        | Home |  ←   |  ↓   |  →   | End  |                              |M Play|Insert| Home | PgUp | VolUp|        | 
+ * |        | Home |  ←   |  ↓   |  →   | End  |                              |M Prev|Insert| Home | PgUp | VolUp|        | 
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+-+----+------+------+------+--------| 
  * |        |      |      |      |      |      |      |      |  |      |      |M Next|Delete| End  | PgDn | VolDn|        | 
  * `--------+-------------+------+------+------+------+------|  |------+------+------+------+------+------+---------------' 
@@ -146,8 +146,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NAV] = LAYOUT(
-      _______, _______,C(KC_LEFT),KC_UP,C(KC_RGHT),_______,                                     KC_MPRV, KC_PSCR, KC_SLCK,KC_PAUSE, KC_MUTE, _______,
-      _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END ,                                     KC_MPLY, KC_INS , KC_HOME,KC_PGUP , KC_VOLU, _______,
+      _______, _______,C(KC_LEFT),KC_UP,C(KC_RGHT),_______,                                     KC_MPLY, KC_PSCR, KC_SLCK,KC_PAUSE, KC_MUTE, KC_DEL,
+      _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END ,                                     KC_MPRV, KC_INS , KC_HOME,KC_PGUP , KC_VOLU, _______,
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_DEL , KC_END ,KC_PGDN , KC_VOLD, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
