@@ -42,6 +42,10 @@ enum custom_keycodes {
 #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
 #define ALT_ENT MT(MOD_LALT, KC_ENT)
 
+// Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
+// The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
+// produces the key `tap` when tapped (i.e. pressed and released).
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * Base Layer: QWERTY
