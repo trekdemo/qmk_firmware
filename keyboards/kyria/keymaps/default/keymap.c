@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 /*
- * Base Layer: Colemak
+ * Base Layer: Colemak DH
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |  Tab   |   Q  |   W  |F/Func|   P  |   B  |                              |   J  |   L  |   U  |   Y  | ;  : |  Bksp  |
