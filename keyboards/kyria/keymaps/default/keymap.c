@@ -25,13 +25,12 @@ enum layers {
     _ADJUST
 };
 
-enum custom_keycodes {
-    QWERTY = SAFE_RANGE,
-    COLEMAK,
-    DVORAK,
-};
 
 // Aliases for readability
+#define QWERTY DF(_QWERTY)
+#define COLEMAK DF(_COLEMAK_DH)
+#define DVORAK DF(_DVORAK)
+
 #define SYM MO(_SYM)
 #define NAV MO(_NAV)
 #define FKEYS MO(_FUNCTION)
@@ -216,30 +215,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //     ),
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-
-        case QWERTY:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_QWERTY);
-            }
-            break;
-
-        case DVORAK:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_DVORAK);
-            }
-            break;
-
-        case COLEMAK:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_COLEMAK_DH);
-            }
-            break;
-
-   }
-    return true;
-};
 
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
