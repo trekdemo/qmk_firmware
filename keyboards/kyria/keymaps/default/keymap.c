@@ -245,13 +245,12 @@ static void render_qmk_logo(void) {
 }
 
 static void render_status(void) {
-    // QMK Logo and version information
     render_qmk_logo();
-    oled_write_P(PSTR("Kyria rev1.0\n\n"), false);
+    oled_write_P(PSTR("Kyria\n\n"), false);
 
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
-    switch (get_highest_layer(layer_state)) {
+    switch (get_highest_layer(layer_state|default_layer_state)) {
         case _QWERTY:
             oled_write_P(PSTR("QWERTY\n"), false);
             break;
