@@ -245,21 +245,27 @@ static void render_qmk_logo(void) {
 }
 
 static void render_status(void) {
-    // QMK Logo and version information
     render_qmk_logo();
-    oled_write_P(PSTR("Kyria rev1.0\n\n"), false);
+    oled_write_P(PSTR("Kyria\n\n"), false);
 
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state)) {
-        case _QWERTY:
-            oled_write_P(PSTR("QWERTY\n"), false);
-            break;
-        case _DVORAK:
-            oled_write_P(PSTR("Dvorak\n"), false);
-            break;
-        case _COLEMAK_DH:
-            oled_write_P(PSTR("Colemak-DH\n"), false);
+        case _QWERTY..._COLEMAK_DH:
+            switch (get_highest_layer(default_layer_state)) {
+                case _QWERTY:
+                    oled_write_P(PSTR("QWERTY\n"), false);
+                    break;
+                case _DVORAK:
+                    oled_write_P(PSTR("Dvorak\n"), false);
+                    break;
+                case _COLEMAK_DH:
+                    oled_write_P(PSTR("Colemak-DH\n"), false);
+                    break;
+                default:
+                    oled_write_P(PSTR("Undefined\n"), false);
+                    break;
+            }
             break;
         case _NAV:
             oled_write_P(PSTR("Nav\n"), false);
