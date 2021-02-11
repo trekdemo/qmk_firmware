@@ -20,15 +20,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_wrapper(
     _____________________QWERTY_L1______________________,                                     _____________________QWERTY_R1______________________,
     _____________________QWERTY_L2______________________,                                     _____________________QWERTY_R2______________________,
-    _____________________QWERTY_L3______________________, KC_LCBR, KC_LPRN, KC_RPRN, KC_RCBR, _____________________QWERTY_R3______________________,
-                               RGB_TOG, _________THUMB_L_________, KC_LBRC, KC_RBRC, _________THUMB_R_________, TO_COLM
+    _____________________QWERTY_L3______________________, KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, _____________________QWERTY_R3______________________,
+                               RGB_TOG, _________THUMB_L_________, KC_LBRC, KC_RBRC, _________THUMB_R_________, CMK_DHM
   ),
 
   [_COLEMAK] = LAYOUT_wrapper(
     _____________________COLMAK_L1______________________,                                     _____________________COLMAK_R1______________________,
     _____________________COLMAK_L2______________________,                                     _____________________COLMAK_R2______________________,
-    _____________________COLMAK_L3______________________, _______, _______, _______, _______, _____________________COLMAK_R3______________________,
-                               RGB_TOG, _________THUMB_L_________, KC_LBRC, KC_RBRC, _________THUMB_R_________, TO_QWER
+    _____________________COLMAK_L3______________________, KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, _____________________COLMAK_R3______________________,
+                               RGB_TOG, _________THUMB_L_________, KC_LBRC, KC_RBRC, _________THUMB_R_________, QWERTY
   ),
 
   [_NUM] = LAYOUT_wrapper(
@@ -38,13 +38,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                _______, _________NUM_L4__________, _______, _______, _________NUM_R4__________, _______
   ),
 
-  [_NAV] = LAYOUT_wrapper(
-    ________________________NAV_L1______________________,                                     ________________________NAV_R1______________________,
-    ________________________NAV_L2______________________,                                     ________________________NAV_R2______________________,
-    ________________________NAV_L3______________________, _______, _______, _______, _______, ________________________NAV_R3______________________,
-                               _______, _________NAV_L4__________, _______, _______, _________NAV_R4__________, _______
-  ),
-
   [_MOUSE] = LAYOUT_wrapper(
     ________________________MOU_L1______________________,                                     ________________________MOU_R1______________________,
     ________________________MOU_L2______________________,                                     ________________________MOU_R2______________________,
@@ -52,18 +45,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                _______, _________MOU_L4__________, _______, _______, _________MOU_R4__________, _______
   ),
 
+  [_LWR] = LAYOUT_wrapper(
+    ________________________LWR_L1______________________,                                     ________________________LWR_R1______________________,
+    ________________________LWR_L2______________________,                                     ________________________LWR_R2______________________,
+    ________________________LWR_L3______________________, _______, _______, _______, _______, ________________________LWR_R3______________________,
+                               _______, _________LWR_L4__________, _______, _______, _________LWR_R4__________, _______
+  ),
+
   [_RAISE] = LAYOUT_wrapper(
     ________________________RAI_L1______________________,                                     ________________________RAI_R1______________________,
     ________________________RAI_L2______________________,                                     ________________________RAI_R2______________________,
     ________________________RAI_L3______________________, _______, _______, _______, _______, ________________________RAI_R3______________________,
                                _______, __________RAI_L4_________, _______, _______, __________RAI_R4_________, _______
-  ),
-
-  [_SYM] = LAYOUT_wrapper(
-    ________________________SYM_L1______________________,                                     ________________________SYM_R1______________________,
-    ________________________SYM_L2______________________,                                     ________________________SYM_R2______________________,
-    ________________________SYM_L3______________________, _______, _______, _______, _______, ________________________SYM_R3______________________,
-                               _______, __________SYM_L4_________, _______, _______, __________SYM_R4_________, _______
   ),
 
   [_ADJUST] = LAYOUT_wrapper(
@@ -74,40 +67,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
-
-#ifdef RGBLIGHT_LAYERS
-// Light LEDs 9 & 10 in cyan when keyboard layer 1 is active
-const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 2, HSV_RED},
-    {10, 2, HSV_RED}
-);
-const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 2, HSV_BLUE},
-    {10, 2, HSV_BLUE}
-);
-const rgblight_segment_t PROGMEM ajust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 2, HSV_PURPLE},
-    {10, 2, HSV_PURPLE}
-);
-// Now define the array of layers. Later layers take precedence
-const rgblight_segment_t* const PROGMEM my_rgb_layers[] =
-  RGBLIGHT_LAYERS_LIST(lower_layer, raise_layer, ajust_layer);
-
-void keyboard_post_init_user(void) { rgblight_layers = my_rgb_layers; }
-#endif
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-  /* layer_state_t new_state = update_tri_layer_state(state, _NAV, _RAISE, _ADJUST); */
-  layer_state_t new_state = state;
-
-#ifdef RGBLIGHT_LAYERS
-  rgblight_set_layer_state(0, layer_state_cmp(new_state, _NAV));
-  rgblight_set_layer_state(1, layer_state_cmp(new_state, _RAISE));
-  rgblight_set_layer_state(2, layer_state_cmp(new_state, _ADJUST));
-#endif
-
-  return new_state;
-}
 
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -135,29 +94,23 @@ static void render_status(void) {
       oled_write_P(PSTR("_ _ _ _ _ + 4 5 6 -\n\n"), false);
       oled_write_P(PSTR("_ _ _ _ _ * 1 2 3 /\n"), false);
       break;
-    case _NAV:
-      oled_write_P(PSTR("Navigation\n\n"), false);
-      oled_write_P(PSTR("R _ _ _ _ R P C X U\n\n"), false);
-      oled_write_P(PSTR("_ _ _ _ _ < v ^ > C\n\n"), false);
-      oled_write_P(PSTR("_ _ _ _ _ H D U E I\n"), false);
-      break;
     case _MOUSE:
       oled_write_P(PSTR("MOUSE\n\n"), false);
       oled_write_P(PSTR("_ _ _ _ _ _ _ _ _ _\n\n"), false);
       oled_write_P(PSTR("Cursor:   < v ^ > _\n\n"), false);
       oled_write_P(PSTR("Wheel:    < ^ V > _\n"), false);
       break;
-    case _RAISE:
-      oled_write_P(PSTR("RAISE\n\n"), false);
-      oled_write_P(PSTR("! @ # $ % ^ & * ( )\n\n"), false);
-      oled_write_P(PSTR("1 2 3 4 5 6 7 8 9 0\n\n"), false);
-      oled_write_P(PSTR("    ` ~ = - + / * %\n"), false);
+    case _LWR:
+      oled_write_P(PSTR("Lower\n\n"), false);
+      oled_write_P(PSTR("R _ _ _ _ R P C X U\n\n"), false);
+      oled_write_P(PSTR("_ _ _ _ _ < v ^ > C\n\n"), false);
+      oled_write_P(PSTR("_ _ _ _ _ H D U E I\n"), false);
       break;
-    case _SYM:
-      oled_write_P(PSTR("SYMBOLS\n\n"), false);
-      oled_write_P(PSTR("_ _ _ _ _ _ _ _ _ _\n\n"), false);
-      oled_write_P(PSTR("_ _ _ _ _ _ _ _ _ _\n\n"), false);
-      oled_write_P(PSTR("_ _ _ _ _ _ _ _ _ _\n"), false);
+    case _RAISE:
+      oled_write_P(PSTR("Raise\n\n"), false);
+      oled_write_P(PSTR("1 2 3 4 5 6 7 8 9 0\n\n"), false);
+      oled_write_P(PSTR("! @ # $ % ^ & * ( )\n\n"), false);
+      oled_write_P(PSTR("    ` ~ = - + / * %\n"), false);
       break;
     case _ADJUST:
       oled_write_P(PSTR("ADJUST\n\n"), false);
@@ -212,7 +165,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   }
   else if (index == 1) {
     switch (get_highest_layer(layer_state)) {
-      case _NAV:
+      case _LWR:
         clockwise ? tap_code(KC_PGUP) : tap_code(KC_PGDN);
         break;
       case _MOUSE:

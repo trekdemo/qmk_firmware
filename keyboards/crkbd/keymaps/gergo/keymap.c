@@ -41,13 +41,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                _________NUM_L4__________, _________NUM_R4__________
   ),
 
-  [_NAV] = LAYOUT_wrapper(
-    ________________________NAV_L1______________________, ________________________NAV_R1______________________,
-    ________________________NAV_L2______________________, ________________________NAV_R2______________________,
-    ________________________NAV_L3______________________, ________________________NAV_R3______________________,
-                               _________NAV_L4__________, _________NAV_R4__________
-  ),
-
   [_MOUSE] = LAYOUT_wrapper(
     ________________________MOU_L1______________________, ________________________MOU_R1______________________,
     ________________________MOU_L2______________________, ________________________MOU_R2______________________,
@@ -55,18 +48,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                _________MOU_L4__________, _________MOU_R4__________
   ),
 
+  [_LWR] = LAYOUT_wrapper(
+    ________________________LWR_L1______________________, ________________________LWR_R1______________________,
+    ________________________LWR_L2______________________, ________________________LWR_R2______________________,
+    ________________________LWR_L3______________________, ________________________LWR_R3______________________,
+                               _________LWR_L4__________, _________LWR_R4__________
+  ),
+
   [_RAISE] = LAYOUT_wrapper(
     ________________________RAI_L1______________________, ________________________RAI_R1______________________,
     ________________________RAI_L2______________________, ________________________RAI_R2______________________,
     ________________________RAI_L3______________________, ________________________RAI_R3______________________,
                                __________RAI_L4_________, __________RAI_R4_________
-  ),
-
-  [_SYM] = LAYOUT_wrapper(
-    ________________________SYM_L1______________________, ________________________SYM_R1______________________,
-    ________________________SYM_L2______________________, ________________________SYM_R2______________________,
-    ________________________SYM_L3______________________, ________________________SYM_R3______________________,
-                               __________SYM_L4_________, __________SYM_R4_________
   ),
 
   [_ADJUST] = LAYOUT_wrapper(
@@ -85,27 +78,28 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   return rotation;
 }
 
-#define L_BASE 0
-#define L_LOWER 2
-#define L_RAISE 4
-#define L_ADJUST 8
-
 void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
     switch (layer_state) {
-        case L_BASE:
-            oled_write_ln_P(PSTR("Default"), false);
+        case _QWERTY:
+            oled_write_ln_P(PSTR("QWERTY"), false);
             break;
-        case L_LOWER:
+        case _COLEMAK:
+            oled_write_ln_P(PSTR("Colemak-DH"), false);
+            break;
+        case _MOUSE:
+            oled_write_ln_P(PSTR("Mouse"), false);
+            break;
+        case _NUM:
+            oled_write_ln_P(PSTR("NumPad"), false);
+            break;
+        case _LWR:
             oled_write_ln_P(PSTR("Lower"), false);
             break;
-        case L_RAISE:
+        case _RAISE:
             oled_write_ln_P(PSTR("Raise"), false);
             break;
-        case L_ADJUST:
-        case L_ADJUST|L_LOWER:
-        case L_ADJUST|L_RAISE:
-        case L_ADJUST|L_LOWER|L_RAISE:
+        case _ADJUST:
             oled_write_ln_P(PSTR("Adjust"), false);
             break;
     }
@@ -173,11 +167,10 @@ void oled_task_user(void) {
     }
 }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-    set_base_layer(keycode, record);
-    set_keylog(keycode, record);
-  }
-  return true;
-}
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//   if (record->event.pressed) {
+//     set_keylog(keycode, record);
+//   }
+//   return true;
+// }
 #endif // OLED_DRIVER_ENABLE
